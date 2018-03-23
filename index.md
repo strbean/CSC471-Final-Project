@@ -1,44 +1,15 @@
 ## Screenshots
-![Middle of map with VIS enabled](img/mid-vis.png)
+
+Middle of map with VIS disabled:
 ![Middle of map with VIS disabled](img/mid-no-vis.png)
+Middle of map with VIS enabled:
+![Middle of map with VIS enabled](img/mid-vis.png)
 
-![Enclosed space with VIS enabled](img/stairs-vis.png)
+Note that various surfaces that should be visible are not rendered when VIS is enabled. These surfaces use displacement mapping, which is not yet supported in this project. Such surfaces require special handling in VIS, and these features of the Source Engine are not well documented.
+
+Enclosed space with VIS disabled
 ![Enclosed space with VIS disabled](img/stairs-no-vis.png)
+Enclosed space with VIS enabled
+![Enclosed space with VIS enabled](img/stairs-vis.png)
 
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/strbean/csc471/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/strbean/csc471/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Note the performance difference in an enclosed space. Without VIS culling, all faces in the map are rendered, bringing the FPS down to around 35. With VIS culling in a location without line-of-site to much of the map, far fewer faces are rendered, allowing the FPS to cap out at 60.
