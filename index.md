@@ -1,3 +1,7 @@
+## Screenshots
+![Middle of map with VIS enabled](img/mid-vis)
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/strbean/csc471/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
