@@ -1,4 +1,8 @@
+BSP renderer by Joseph Thomas
+
 ## Project Description
+
+![Top view of koth_nucleus.bsp](img/top.png)
 
 This project loads a .BSP map file for the Source Engine (the engine used for games like Team Fortress 2, Half-Life 2, and CS:GO) and renders the static geometry with textures and various types of face culling. It also implements a free-look camera to allow the user to explore the geometry.
 
