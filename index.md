@@ -14,17 +14,29 @@ I implemented a free look camera in a fashion similar to our previous projects. 
 
 My initial hope was to support Source Engine material (VMT) and texture (VTF) files directly. However, there were some major technical constraints that prevented me from doing this within our timeline for the project. VMT files are a text format with a variety of odd features, and VTF files are in a proprietary format that is not documented publicly. I was able to find some crusty, unsupported Javascript libraries with partial support for VTF files, but they were not entirely suitable. Another roadblock was texture compression: textures used in games are almost universally compressed with one of a variety of compression algorithms know as DXT*. Support for these formats in WebGL utility libraries is spotty, and the libraries I am using have poor support for them.
 
-To go around these issues, I chose to use a utility to extract textures for the map I am testing with, and convert then to PNG images. These images are stored in a dictionary addressed by the path used in the BSP file to reference them. Texture coordinates are calculated 
+To go around these issues, I chose to use a utility to extract textures for the map I am testing with, and convert then to PNG images. These images are stored in a dictionary addressed by the path used in the BSP file to reference them.
 
-### VIS Culling
+In the future I hope to implement a VMT parser and use texture data directly from the VTFs. This will also be important for the addition of lighting.
 
-### Backface Culling
+### Culling
+
+Visibility culling is the process of determining what elements of a scene are not visible and skipping them during rendering. Performing culling is very complex, and doing it perfectly is usually not worthwhile. In order to determine every face that is visible, you have to cast rays from the camera position into the scene, which is very computationally expensive. There are low hanging fruit, however. If all geometry is closed, we know that any face that is pointing away from the camera is not visible - removing these is called backface culling. We can also check whether our geometry is within our viewing frustum. If we use axis-aligned bounding boxes for this check, it is very cheap and this eliminates a ton of geometry.
+
+#### VIS Culling
+
+Visibility culling beyond these methods is a very difficult problem. Because of the computational complexity involved, the Source Engine performs this analysis during map compilation, and stores information about what is visible from where inside the BSP file.
+
+#### Backface Culling
 
 Backface culling is the process of removing / ignoring any faces of scene geometry that are facing away from the camera. For example, if I draw an opaque cube on the screen, only the sides facing me are visible. If we draw the sides that are on the other side of the cube, we are wasting time!
 
 The standard method for defining the direction a face is pointing is based on *winding*. This is the same concept that we used in calculating barycentric coordinates in our software renderer. In that project, we specified triangles in a counter-clockwise (CCW) fashion. We could tell if a point was outside of the triangle because we would get a negative value when computing the areas of the subtriangles. If we looked at the triangles from the other side, the winding would be flipped.
 
 In this project, I chose to perform backface culling on the GPU. Interestingly, the Source Engine appears to specify geometry using a clockwise (CW) winding.
+
+#### Frustum Culling
+
+Unfortunately I did not have time to implement frustum culling for this project. That's probably the first thing on the TODO list.
 
 ## Screenshots
 
