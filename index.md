@@ -1,6 +1,9 @@
 ## Screenshots
-![Middle of map with VIS enabled](img/mid-vis)
+![Middle of map with VIS enabled](img/mid-vis.png)
+![Middle of map with VIS disabled](img/mid-no-vis.png)
 
+![Enclosed space with VIS enabled](img/stairs-vis.png)
+![Enclosed space with VIS disabled](img/stairs-no-vis.png)
 
 ## Welcome to GitHub Pages
 
