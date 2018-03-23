@@ -26,6 +26,10 @@ Visibility culling is the process of determining what elements of a scene are no
 
 Visibility culling beyond these methods is a very difficult problem. Because of the computational complexity involved, the Source Engine performs this analysis during map compilation, and stores information about what is visible from where inside the BSP file.
 
+Source Engine maps are fully closed. This means that there is an internal area that players can move around in, and no openings out to the 'void'. This internal area of the map is divided into small volumes called leaves. When the map is being compiled, the lighting tool determines what other leaves are visible from each leaf. It then stores this information in an array of bitfields in the BSP. To save space, the zeroes in the bitfield are run-length encoded, so a byte of 0 indicates that the next byte specifies how many 0 bytes should follow.
+
+During rendering, we use the [BSP tree structure](https://en.wikipedia.org/wiki/Binary_space_partitioning) to determine what leaf the camera is in, and then use the visibility array to check which other leaves to render.
+
 #### Backface Culling
 
 Backface culling is the process of removing / ignoring any faces of scene geometry that are facing away from the camera. For example, if I draw an opaque cube on the screen, only the sides facing me are visible. If we draw the sides that are on the other side of the cube, we are wasting time!
